@@ -13,11 +13,20 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const searchMovies = async (title) => {
-        console.log('baseUrl', config.MOVIE_BASE_URL)
-        const response = await fetch(`${config.MOVIE_BASE_URL}${ENDPOINT_PATH}${title}`); 
-        const data = await response.json();
 
-        setMovies(data.value.Search);
+        try
+        {
+            console.log('baseUrl', config.MOVIE_BASE_URL)
+            const response = await fetch(`${config.MOVIE_BASE_URL}${ENDPOINT_PATH}${title}`); 
+            const data = await response.json();
+    
+            setMovies(data.value.Search);
+        }
+        catch(error)
+        {
+            console.log(error)
+            return null
+        }
     }
 
     useEffect(() => {
